@@ -1,7 +1,7 @@
 const express = require('express');
 const { Pool } = require('pg');
 const app = express();
-
+alert(" i am in server");
 // ✅ Use process.env.PORT (not lowercase `port`)
 const PORT = process.env.PORT || 3000;
 
