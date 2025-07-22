@@ -18,7 +18,7 @@ const pool = new Pool({
 
 // ✅ Create table if not exists (optional, for testing)
 pool.query(`
-  CREATE TABLE IF NOT EXISTS User_Details (
+  CREATE TABLE IF NOT EXISTS user_details (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
     message TEXT NOT NULL
@@ -30,7 +30,7 @@ app.post('/send', async (req, res) => {
   const { name, message } = req.body;
   try {
     await pool.query(
-      'INSERT INTO User_Details (name, message) VALUES ($1, $2)',
+      'INSERT INTO user_details (name, message) VALUES ($1, $2)',
       [name, message]
     );
     res.send(`Saved to DB. Thank you, ${name}!`);
