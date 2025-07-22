@@ -3,7 +3,7 @@ const { Pool } = require('pg');
 const app = express();
 alert(" i am in server");
 // ✅ Use process.env.PORT (not lowercase `port`)
-const PORT = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
@@ -46,6 +46,6 @@ app.get('/', (req, res) => {
 });
 
 // ✅ Bind to 0.0.0.0 and correct PORT
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server running on port ${PORT}`);
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Server running on port ${port}`);
 });
