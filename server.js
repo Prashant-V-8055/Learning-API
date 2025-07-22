@@ -1,27 +1,31 @@
 const express = require('express');
 const { Pool } = require('pg');
 const app = express();
-const port = process.env.PORT || 3000;
+
+// ✅ Use process.env.PORT (not lowercase `port`)
+const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
-// Supabase DB connection details here 👇
+// ✅ Supabase DB connection
 const pool = new Pool({
   user: 'postgres',
-  host: 'db.papjehehbbggneadffyt.supabase.co',
+  host: 'db.papjehehbbggneadffyt.supabase.co', // 👈 Replace with your actual host
   database: 'postgres',
-  password: 'Apilab@8055',
+  password: 'Apilab@8055', // 👈 Replace with your actual password
   port: 5432
 });
 
+// ✅ Create table if not exists (optional, for testing)
 pool.query(`
-  CREATE TABLE IF NOT EXISTS messages (
+  CREATE TABLE IF NOT EXISTS User_Details (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
     message TEXT NOT NULL
   );
-`);
+`).catch(err => console.error("Table creation error:", err));
 
+// ✅ POST route to save messages
 app.post('/send', async (req, res) => {
   const { name, message } = req.body;
   try {
@@ -36,10 +40,12 @@ app.post('/send', async (req, res) => {
   }
 });
 
+// ✅ GET root route
 app.get('/', (req, res) => {
   res.send("API is live!");
 });
 
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Server running on port ${port}`);
+// ✅ Bind to 0.0.0.0 and correct PORT
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running on port ${PORT}`);
 });
