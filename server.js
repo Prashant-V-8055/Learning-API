@@ -1,7 +1,7 @@
 const express = require('express');
 const { Pool } = require('pg');
 const app = express();
-const port = process.env.PORT || 10000;
+const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
@@ -40,6 +40,6 @@ app.get('/', (req, res) => {
   res.send("API is live!");
 });
 
-app.listen(port, () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${port}`);
 });
